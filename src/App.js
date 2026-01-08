@@ -113,8 +113,10 @@ function App() {
       {playerSymbol === null ? (
         <div>
           <h1>{status}</h1>
-          <button onClick={() => chooseSymbol("X")}>X</button>
-          <button onClick={() => chooseSymbol("O")}>O</button>
+          <div className="select">
+            <button onClick={() => chooseSymbol("X")}>X</button>
+            <button onClick={() => chooseSymbol("O")}>O</button>
+          </div>
         </div>
       ) : (
         <>

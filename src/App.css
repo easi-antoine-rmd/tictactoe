@@ -26,3 +26,13 @@ button {
 button:hover {
   background-color: #eee;
 }
+
+.select {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.select > button {
+  height: 80px;
+  width: 80px;
+}
