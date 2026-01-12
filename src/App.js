@@ -4,17 +4,30 @@ import { useEffect, useState } from "react";
 import Square from "./components/Square";
 
 function App() {
-  const SIZE = 5;
 
+  // Taille de la grille (ex: 3 = 3x3, 4 = 4x4)
+  const SIZE = 3;
+
+  // Plateau de jeu représenté comme un tableau 1D
   const [board, setBoard] = useState(Array(SIZE * SIZE).fill(null));
+
+  // Indique si c'est au tour de X ou O
   const [isXNext, setIsXNext] = useState(true);
 
+  // Symbole du joueur humain
   const [playerSymbol, setPlayerSymbol] = useState(null);
+
+  // Symbole de l'ordinateur
   const [computerSymbol, setComputerSymbol] = useState(null);
 
+  /**
+   * Vérifie s'il y a un gagnant sur le plateau
+   * Retourne "X", "O" ou null
+   */
   const calculateWinner = (b) => {
     const winPossibilites = [];
 
+    // Lignes
     for (let r = 0; r < SIZE; r++) {
       const row = [];
       for (let c = 0; c < SIZE; c++) {
@@ -23,6 +36,7 @@ function App() {
       winPossibilites.push(row);
     }
 
+    // Colonnes
     for (let c = 0; c < SIZE; c++) {
       const col = [];
       for (let r = 0; r < SIZE; r++) {
@@ -31,18 +45,21 @@ function App() {
       winPossibilites.push(col);
     }
 
+    // Diagonale principale
     const diag1 = [];
     for (let i = 0; i < SIZE; i++) {
       diag1.push(i * SIZE + i);
     }
     winPossibilites.push(diag1);
 
+    // Diagonale secondaire
     const diag2 = [];
     for (let i = 0; i < SIZE; i++) {
       diag2.push(i * SIZE + (SIZE - 1 - i));
     }
-    winPossibilites.push(diag1);
+    winPossibilites.push(diag2);
 
+    // Vérification de chaque possibilité de victoire
     for (const possibility of winPossibilites) {
       const firstSymbol = b[possibility[0]];
       if (firstSymbol === null) continue;
@@ -63,12 +80,19 @@ function App() {
     return null;
   };
 
+  // Calcul du gagnant
   const winner = calculateWinner(board);
+
+  // Match nul si le plateau est plein et pas de gagnant
   const isDraw = board.every((cell) => cell !== null) && winner === null;
 
+  // Symbole du tour actuel
   const currentSymbol = isXNext ? "X" : "O";
+
+  // Indique si c'est au tour du joueur humain
   const isPlayerTurn = currentSymbol === playerSymbol;
 
+  // Récupère les cases encore libres
   const getEmptyIndexes = (b) => {
     const empties = [];
     for (let i = 0; i < b.length; i++) {
@@ -77,10 +101,13 @@ function App() {
     return empties;
   };
 
+  /**
+   * Effet déclenché quand c'est au tour de l'ordinateur
+   * L'ordinateur joue un coup aléatoire
+   */
   useEffect(() => {
     if (playerSymbol === null || computerSymbol === null) return;
     if (winner || isDraw) return;
-
     if (isPlayerTurn) return;
 
     const empties = getEmptyIndexes(board);
@@ -100,6 +127,9 @@ function App() {
     return () => clearTimeout(timer);
   }, [board, isXNext, playerSymbol, computerSymbol, winner, isDraw, isPlayerTurn]);
 
+  /**
+   * Coup du joueur humain
+   */
   const updateSquareValue = (index) => {
     if (playerSymbol === null) return;
     if (winner || isDraw) return;
@@ -113,25 +143,31 @@ function App() {
     setIsXNext((prev) => !prev);
   };
 
+  /**
+   * Choix du symbole par le joueur
+   */
   const chooseSymbol = (value) => {
     if (value === "X") {
       setPlayerSymbol("X");
       setComputerSymbol("O");
-      setBoard(Array(SIZE * SIZE).fill(null));
-      setIsXNext(true);
     } else {
       setPlayerSymbol("O");
       setComputerSymbol("X");
-      setBoard(Array(SIZE * SIZE).fill(null));
-      setIsXNext(true);
     }
+
+    setBoard(Array(SIZE * SIZE).fill(null));
+    setIsXNext(true);
   };
 
+  /**
+   * Réinitialise la partie
+   */
   const resetGame = () => {
     setBoard(Array(SIZE * SIZE).fill(null));
     setIsXNext(true);
   };
 
+  // Message affiché à l'utilisateur
   let status = "";
   if (playerSymbol === null) {
     status = "Choisis ton symbole";
@@ -159,7 +195,10 @@ function App() {
         <>
           <h1>{status}</h1>
 
-          <div className="board" style={{gridTemplateColumns: `repeat(${SIZE}, 80px)`}}>
+          <div
+            className="board"
+            style={{ gridTemplateColumns: `repeat(${SIZE}, 80px)` }}
+          >
             {board.map((value, index) => (
               <Square
                 key={index}
