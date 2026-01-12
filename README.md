@@ -5,7 +5,7 @@ This project is a **Tic Tac Toe game** developed as part of a technical intervie
 The goal of this exercise is to serve as a **technical support for discussion during the interview**, focusing on code structure, logic, and evolutivity rather than pure visuals.
 
 👉 The application is also **available online**:  
-🔗 **Live demo**: https://[https://tictactoe-kappa-ruddy.vercel.app/](https://tictactoe-kappa-ruddy.vercel.app/)
+🔗 **Live demo**: [https://tictactoe-kappa-ruddy.vercel.app/](https://tictactoe-kappa-ruddy.vercel.app/)
 
 ---
 
