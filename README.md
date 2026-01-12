@@ -43,7 +43,7 @@ The goal of this exercise is to serve as a **technical support for discussion du
 ### Steps
 
 ```bash
-git clone https://github.com/<username>/tictactoe.git
+git clone https://github.com/easi-antoine-rmd/tictactoe.git
 cd tictactoe
 npm install
 npm start
