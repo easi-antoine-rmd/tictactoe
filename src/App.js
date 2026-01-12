@@ -4,25 +4,62 @@ import { useEffect, useState } from "react";
 import Square from "./components/Square";
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const SIZE = 5;
+
+  const [board, setBoard] = useState(Array(SIZE * SIZE).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
   const [playerSymbol, setPlayerSymbol] = useState(null);
   const [computerSymbol, setComputerSymbol] = useState(null);
 
   const calculateWinner = (b) => {
-    const winPossibilites = [
-      [0, 1, 2],[3, 4, 5],[6, 7, 8],
-      [0, 3, 6],[1, 4, 7],[2, 5, 8],
-      [0, 4, 8],[2, 4, 6],
-    ];
+    const winPossibilites = [];
 
-    for (let i = 0; i < winPossibilites.length; i++) {
-      const [a, c, d] = winPossibilites[i];
-      if (b[a] !== null && b[a] === b[c] && b[c] === b[d]) {
-        return b[a];
+    for (let r = 0; r < SIZE; r++) {
+      const row = [];
+      for (let c = 0; c < SIZE; c++) {
+        row.push(r * SIZE + c);
+      }
+      winPossibilites.push(row);
+    }
+
+    for (let c = 0; c < SIZE; c++) {
+      const col = [];
+      for (let r = 0; r < SIZE; r++) {
+        col.push(r * SIZE + c);
+      }
+      winPossibilites.push(col);
+    }
+
+    const diag1 = [];
+    for (let i = 0; i < SIZE; i++) {
+      diag1.push(i * SIZE + i);
+    }
+    winPossibilites.push(diag1);
+
+    const diag2 = [];
+    for (let i = 0; i < SIZE; i++) {
+      diag2.push(i * SIZE + (SIZE - 1 - i));
+    }
+    winPossibilites.push(diag1);
+
+    for (const possibility of winPossibilites) {
+      const firstSymbol = b[possibility[0]];
+      if (firstSymbol === null) continue;
+
+      let hasWon = true;
+      for (const index of possibility) {
+        if (b[index] !== firstSymbol) {
+          hasWon = false;
+          break;
+        }
+      }
+
+      if (hasWon) {
+        return firstSymbol;
       }
     }
+
     return null;
   };
 
@@ -80,18 +117,18 @@ function App() {
     if (value === "X") {
       setPlayerSymbol("X");
       setComputerSymbol("O");
-      setBoard(Array(9).fill(null));
-      setIsXNext(true); 
+      setBoard(Array(SIZE * SIZE).fill(null));
+      setIsXNext(true);
     } else {
       setPlayerSymbol("O");
       setComputerSymbol("X");
-      setBoard(Array(9).fill(null));
-      setIsXNext(true); 
+      setBoard(Array(SIZE * SIZE).fill(null));
+      setIsXNext(true);
     }
   };
 
   const resetGame = () => {
-    setBoard(Array(9).fill(null));
+    setBoard(Array(SIZE * SIZE).fill(null));
     setIsXNext(true);
   };
 
@@ -122,7 +159,7 @@ function App() {
         <>
           <h1>{status}</h1>
 
-          <div className="board">
+          <div className="board" style={{gridTemplateColumns: `repeat(${SIZE}, 80px)`}}>
             {board.map((value, index) => (
               <Square
                 key={index}
