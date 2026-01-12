@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Tic Tac Toe – Technical Exercise
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **Tic Tac Toe game** developed as part of a technical interview process.
 
-## Available Scripts
+The goal of this exercise is to serve as a **technical support for discussion during the interview**, focusing on code structure, logic, and evolutivity rather than pure visuals.
 
-In the project directory, you can run:
+👉 The application is also **available online**:  
+🔗 **Live demo**: https://[https://tictactoe-kappa-ruddy.vercel.app/](https://tictactoe-kappa-ruddy.vercel.app/)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🎯 Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Classic Tic Tac Toe rules
+- Player can **choose their symbol (X or O)** before starting
+- Player vs **Computer (random moves)**
+- Computer plays automatically when it’s its turn
+- Winner and draw detection
+- Possibility to **restart the game without reloading**
+- Clean and readable UI
+- Code structured to allow **easy evolutivity** (ex: 4×4 grid)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🧠 Technical choices
 
-### `npm run build`
+- **React** (Create React App)
+- Functional components
+- State management with `useState`
+- Side effects handled with `useEffect`
+- Game logic separated from UI logic
+- Board represented as a **1D array** to simplify evolutions
+- Winner detection isolated in a dedicated function
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Installation & Run locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm
 
-### `npm run eject`
+### Steps
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/<username>/tictactoe.git
+cd tictactoe
+npm install
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will be available at:  
+👉 http://localhost:3000
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🧪 How to play
 
-## Learn More
+1. Choose your symbol (**X** or **O**)
+2. Click on an empty square to play
+3. The computer will automatically play a random move
+4. The game ends when:
+   - a player wins
+   - or the board is full (draw)
+5. Click **"Rejouer"** to restart without reloading the page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔧 Evolutivity (4×4 example)
 
-### Code Splitting
+The code was written to allow **easy evolutions with minimal changes**, for example:
+- Changing the grid size (3×3 → 4×4)
+- Changing the number of aligned symbols required to win
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This can be achieved by:
+- Parameterizing the board size
+- Using a generic winner detection algorithm
+- Keeping UI logic independent from game rules
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 👤 Author
 
-### Making a Progressive Web App
+**Antoine Raimand**  
+🔗 Portfolio / CV: https://cv.antoineraimand.fr
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to explore the code — it is intended to be **read, discussed, and evolved**.
